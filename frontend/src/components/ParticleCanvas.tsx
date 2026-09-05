@@ -1,91 +1,29 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+import { useTheme } from '@/context/ThemeContext';
 
 export const ParticleCanvas: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationFrameId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
-    const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    const particleCount = 45;
-    const particles: Array<{
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
-      color: string;
-      alpha: number;
-    }> = [];
-
-    const colors = ['#8A2BE2', '#FF70A6', '#F59E0B', '#06B6D4'];
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
-        size: Math.random() * 2.5 + 1,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        alpha: Math.random() * 0.5 + 0.2,
-      });
-    }
-
-    const render = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-        if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
-
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = p.color;
-        ctx.fill();
-        ctx.restore();
-      });
-
-      animationFrameId = requestAnimationFrame(render);
-    };
-
-    render();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
+  const { theme } = useTheme();
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0 opacity-40 transition-opacity duration-1000"
-    />
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+      {theme === 'dark' ? (
+        <>
+          {/* Deep Cyberpunk Aurora Blurs for Dark Mode */}
+          <div className="absolute -top-40 left-1/4 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl" />
+          <div className="absolute top-1/3 -right-20 w-[30rem] h-[30rem] bg-pink-600/10 rounded-full blur-[120px]" />
+          <div className="absolute bottom-10 -left-20 w-80 h-80 bg-cyan-600/10 rounded-full blur-[100px]" />
+          <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl" />
+        </>
+      ) : (
+        <>
+          {/* Subtle Warm Pearl & Sakura Glow for Light Mode */}
+          <div className="absolute -top-32 right-1/4 w-96 h-96 bg-purple-200/40 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 -left-20 w-96 h-96 bg-pink-100/50 rounded-full blur-3xl" />
+          <div className="absolute bottom-10 right-10 w-80 h-80 bg-blue-100/40 rounded-full blur-3xl" />
+        </>
+      )}
+    </div>
   );
 };

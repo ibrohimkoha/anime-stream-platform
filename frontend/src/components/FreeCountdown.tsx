@@ -5,18 +5,20 @@ import { Clock } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
 interface FreeCountdownProps {
-  freeAt?: string;
+  freeAt?: string | null;
+  targetDate?: string | null;
 }
 
-export const FreeCountdown: React.FC<FreeCountdownProps> = ({ freeAt }) => {
+export const FreeCountdown: React.FC<FreeCountdownProps> = ({ freeAt, targetDate }) => {
   const { t } = useLanguage();
+  const dateStr = freeAt || targetDate;
   const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; minutes: number } | null>(null);
 
   useEffect(() => {
-    if (!freeAt) return;
+    if (!dateStr) return;
 
     const calculateTime = () => {
-      const difference = new Date(freeAt).getTime() - new Date().getTime();
+      const difference = new Date(dateStr).getTime() - new Date().getTime();
       if (difference <= 0) {
         setTimeLeft(null);
         return;
@@ -32,17 +34,17 @@ export const FreeCountdown: React.FC<FreeCountdownProps> = ({ freeAt }) => {
     calculateTime();
     const interval = setInterval(calculateTime, 60000);
     return () => clearInterval(interval);
-  }, [freeAt]);
+  }, [dateStr]);
 
   if (!timeLeft) return null;
 
   return (
-    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-semibold backdrop-blur-md animate-pulse">
-      <Clock className="w-3.5 h-3.5 text-amber-400" />
+    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-xl bg-cyan-950/80 text-cyan-300 border border-cyan-500/40 text-[10px] font-black font-mono backdrop-blur-md">
+      <Clock className="w-3 h-3 text-cyan-400 shrink-0" />
       <span>
-        {timeLeft.days > 0 ? `${timeLeft.days}k ` : ''}
-        {timeLeft.hours}s {timeLeft.minutes}d {t('free_countdown_badge')}
+        {timeLeft.days > 0 ? `${timeLeft.days}k ${timeLeft.hours}s` : `${timeLeft.hours}s ${timeLeft.minutes}d`}
       </span>
+      <span className="text-[9px] uppercase tracking-wider opacity-70">tekin</span>
     </div>
   );
 };
