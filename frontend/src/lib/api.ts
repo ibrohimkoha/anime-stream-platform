@@ -1,4 +1,6 @@
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8090/api/v1';
+export const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  (typeof window !== 'undefined' ? '/api/v1' : 'http://localhost:8090/api/v1');
 
 export interface User {
   id: number;
@@ -41,7 +43,7 @@ export interface Anime {
   rating: number;
   views_count: number;
   is_vip: boolean;
-  free_at?: string;
+  free_at?: string | null;
   status: 'ongoing' | 'completed';
   release_year: number;
   genres?: Genre[];

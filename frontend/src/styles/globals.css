@@ -132,3 +132,14 @@ body.light {
 .pb-mobile-nav {
   padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

@@ -45,7 +45,7 @@ export default function HomePage() {
 
       {/* 2. Quick Genre Chips Bar */}
       {genres.length > 0 && (
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
           <Link
             href="/genres"
             className="flex items-center gap-1.5 px-4 py-2 rounded-2xl bg-purple-600 text-white text-xs font-bold shrink-0 shadow-md shadow-purple-600/20"

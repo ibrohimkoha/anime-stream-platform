@@ -10,39 +10,40 @@ module.exports = {
     extend: {
       colors: {
         dark: {
-          bg: '#090A0F',
-          surface: '#12151F',
-          card: 'rgba(18, 21, 31, 0.85)',
-          border: 'rgba(255, 255, 255, 0.1)',
+          bg: '#090B10',
+          surface: '#111420',
+          card: 'rgba(17, 20, 32, 0.85)',
+          border: 'rgba(255, 255, 255, 0.08)',
         },
         light: {
           bg: '#F8FAFC',
           surface: '#FFFFFF',
-          card: 'rgba(255, 255, 255, 0.9)',
-          border: 'rgba(0, 0, 0, 0.08)',
+          card: 'rgba(255, 255, 255, 0.95)',
+          border: 'rgba(226, 232, 240, 0.9)',
         },
         primary: {
-          DEFAULT: '#8A2BE2',
-          hover: '#7C3AED',
-          light: '#A78BFA',
+          DEFAULT: '#9333EA',
+          hover: '#7E22CE',
+          light: '#C084FC',
         },
         vip: {
           DEFAULT: '#F59E0B',
-          glow: '#FFD700',
+          glow: '#FBBF24',
         },
         accent: {
-          sakura: '#FF70A6',
+          sakura: '#F43F5E',
           cyan: '#06B6D4',
         }
       },
       fontFamily: {
-        heading: ['Syne', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        heading: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+        body: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
       animation: {
-        'marquee': 'marquee 35s linear infinite',
-        'marquee-reverse': 'marquee-reverse 35s linear infinite',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'marquee': 'marquee 30s linear infinite',
+        'marquee-reverse': 'marquee-reverse 30s linear infinite',
+        'pulse-subtle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'float': 'float 6s ease-in-out infinite',
       },
       keyframes: {
@@ -56,7 +57,7 @@ module.exports = {
         },
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
+          '50%': { transform: 'translateY(-8px)' },
         }
       }
     },
