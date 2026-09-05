@@ -1,0 +1,6 @@
+node_modules/
+.next/
+bin/
+*.log
+uploads/
+.env.local
